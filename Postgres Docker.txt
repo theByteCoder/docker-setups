@@ -1,0 +1,31 @@
+docker pull postgres
+docker run --name postgres -e POSTGRES_PASSWORD=postgres -p 127.0.0.1:5433:5432 -d postgres
+// default user is postgres
+
+copy local test_db-master directory from host to container
+docker cp D:\Softwares\employees_data.sql a9aa225f506b:/docker-entrypoint-initdb.d/
+
+use docker bash
+docker exec -it <container id> bash
+
+login to mysql
+psql -U postgres -W
+password: root
+
+create empty database
+create database employees;
+
+show databases command
+\l
+
+connect to database
+\c db_name
+
+show db tables
+\dt
+
+load into employees db from employees.sql file
+psql -U postgres employees < /docker-entrypoint-initdb.d/employees_data.sql/employees_data.sql
+
+exit mysql
+exit

@@ -1,0 +1,23 @@
+docker pull mysql
+docker run --name mysql -e MYSQL_ROOT_PASSWORD=root -p 127.0.0.1:3307:3306 -d mysql:latest
+
+copy local test_db-master directory from host to container
+docker cp D:\Softwares\test_db-master a9aa225f506b:/docker-entrypoint-initdb.d/
+
+use docker bash
+docker exec -it <container id> bash
+
+login to mysql
+mysql -u root -p
+password: root
+
+create empty database
+create database employees;
+
+show databases command
+show databases;
+
+exit mysql
+
+load into employees db from employees.sql file
+mysql -u root --password=root employees < /docker-entrypoint-initdb.d/test_db-master/employees-docker.sql
